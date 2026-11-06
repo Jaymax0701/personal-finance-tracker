@@ -1,25 +1,31 @@
 {
   "name": "personal-finance-tracker",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:worker": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "db:local": "wrangler d1 migrations apply finance-db --local",
+    "db:remote": "wrangler d1 migrations apply finance-db --remote"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.57.0",
+    "jose": "^6.1.0",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20261106.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "~5.7.2",
-    "vite": "^6.0.7"
+    "vite": "^6.0.7",
+    "wrangler": "^4.45.0"
   }
 }
