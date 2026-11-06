@@ -37,7 +37,7 @@ create table if not exists public.transactions (
   merchant text,
   notes text,
   created_at timestamptz not null default now(),
-  foreign key (account_id, user_id) references public.accounts(id, user_id) on delete set null
+  foreign key (account_id, user_id) references public.accounts(id, user_id) on delete restrict
 );
 
 create table if not exists public.budgets (

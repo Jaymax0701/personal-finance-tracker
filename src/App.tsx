@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import type { FormEvent } from 'react'
 import {
   ArrowDownLeft, ArrowUpRight, Bell, CalendarDays, ChartNoAxesCombined, ChevronDown,
   CircleHelp, CreditCard, LayoutDashboard, Plus, Search, Settings2, ShieldCheck,
@@ -39,7 +40,7 @@ function App() {
   const filtered = useMemo(() => transactions.filter(t => (t.name + t.category).toLowerCase().includes(search.toLowerCase())), [transactions, search])
   const income = transactions.filter(t => t.kind === 'income').reduce((s, t) => s + t.amount, 0)
   const expenses = transactions.filter(t => t.kind === 'expense').reduce((s, t) => s + t.amount, 0)
-  const addTransaction = (e: React.FormEvent) => {
+  const addTransaction = (e: FormEvent) => {
     e.preventDefault()
     if (!form.name.trim() || !Number(form.amount) || Number(form.amount) <= 0) return
     setTransactions([{ id: Date.now(), name: form.name, category: form.category, date: 'Just now', amount: Number(form.amount), kind: form.kind, initials: form.name.slice(0, 2).toUpperCase(), color: form.kind === 'income' ? 'mint' : 'orange' }, ...transactions])
@@ -87,7 +88,7 @@ function App() {
               <article className="panel transactions-panel"><div className="panel-heading"><div><h2>Recent transactions</h2><p>Your latest money movements</p></div><button className="text-button" onClick={() => setActive('Transactions')}>View all <ArrowUpRight size={14} /></button></div><TransactionList items={transactions.slice(0, 5)} /></article>
               <article className="panel goals-panel"><div className="panel-heading"><div><h2>Savings goals</h2><p>Small steps, meaningful progress</p></div><button className="text-button" onClick={() => setActive('Savings goals')}>View all <ArrowUpRight size={14} /></button></div><div className="goal-card"><div className="goal-top"><div className="goal-icon"><Landmark size={17} /></div><span>12 MONTHS LEFT</span></div><b>Emergency fund</b><div className="goal-amount">{money(4200)} <small>of RM 10,000</small></div><div className="goal-track"><i style={{ width: '42%' }} /></div><div className="goal-bottom"><span>42% completed</span><b>RM 5,800 to go</b></div></div><div className="goal-note"><Target size={16} /><span>You're making progress. Keep it consistent.</span></div></article>
             </section>
-          </> : active === 'Transactions' ? <section className="panel full-panel"><div className="panel-heading"><div><h2>All transactions</h2><p>Review and search your money movements</p></div><div className="search-box"><Search size={15} /><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search transactions" /></div></div><TransactionList items={filtered} /></section> : <section className="panel empty-module"><div className="empty-icon"><activeIcon name={active} /></div><h2>{active}</h2><p>This workspace is scaffolded for the next build stage. Your records will be connected to your private Supabase account after configuration.</p><button className="primary-button" onClick={() => setShowAdd(true)}><Plus size={16} /> Add transaction</button></section>}
+          </> : active === 'Transactions' ? <section className="panel full-panel"><div className="panel-heading"><div><h2>All transactions</h2><p>Review and search your money movements</p></div><div className="search-box"><Search size={15} /><input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search transactions" /></div></div><TransactionList items={filtered} /></section> : <section className="panel empty-module"><div className="empty-icon"><ActiveIcon name={active} /></div><h2>{active}</h2><p>This workspace is scaffolded for the next build stage. Your records will be connected to your private Supabase account after configuration.</p><button className="primary-button" onClick={() => setShowAdd(true)}><Plus size={16} /> Add transaction</button></section>}
           <footer className="page-footer"><span>LEDGER <i>·</i> PERSONAL FINANCE</span><span><ShieldCheck size={13} /> Private by design</span><span>MYR · Malaysia</span></footer>
         </div>
       </main>
@@ -95,7 +96,7 @@ function App() {
     </div>
   )
 }
-function activeIcon({ name }: { name: string }) {
+function ActiveIcon({ name }: { name: string }) {
   const Icon = name === 'Budgets' ? ChartNoAxesCombined : name === 'Accounts' ? Wallet : name === 'Financing' ? CreditCard : name === 'Savings goals' ? Target : name === 'Recurring bills' ? Repeat2 : name === 'Tax records' ? CalendarDays : ReceiptText
   return <Icon size={25} />
 }
