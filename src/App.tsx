@@ -69,7 +69,7 @@ function App() {
         <header className="topbar">
           <button className="icon-button mobile-menu" onClick={() => setMobileNav(true)} aria-label="Open menu"><Menu size={19} /></button>
           <div className="breadcrumb">Workspace <span>/</span> <b>{active}</b></div>
-          <div className="top-actions"><div className="demo-pill"><span />{isSupabaseConfigured ? 'CONNECTED' : 'DEMO MODE'}</div><button className="icon-button" aria-label="Notifications"><Bell size={18} /><i /></button><div className="top-avatar">J</div></div>
+          <div className="top-actions"><div className="demo-pill"><span />{isSupabaseConfigured ? 'SUPABASE CONFIGURED' : 'DEMO MODE'}</div><button className="icon-button" aria-label="Notifications"><Bell size={18} /><i /></button><div className="top-avatar">J</div></div>
         </header>
         <div className="page-content">
           <section className="welcome-row"><div><div className="eyebrow">FRIDAY, 06 NOVEMBER 2026 <span>·</span> YOUR FINANCIAL OVERVIEW</div><h1>{active === 'Overview' ? 'Good afternoon.' : active}</h1><p className="page-subtitle">{active === 'Overview' ? 'A clearer picture of where your money goes.' : `A simple view of your ${active.toLowerCase()} and financial activity.`}</p></div><button className="primary-button" onClick={() => setShowAdd(true)}><Plus size={17} /> Add transaction</button></section>
